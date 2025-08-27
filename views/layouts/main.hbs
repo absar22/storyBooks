@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
-    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/style.css">
-    <title>StoryBooks</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Compiled and minified CSS (Materialize) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- ✅ Fixed Font Awesome (no integrity issues) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  <title>StoryBooks</title>
 </head>
 <body>
-    {{> _header}}
-    <div class="container">
-       {{{body}}}
-    </div>
+  {{> _header}}
+  {{> _add_btn}}
+  
+  <div class="container">
+    {{{body}}}
+  </div>
 
+  <!-- Compiled and minified JavaScript (Materialize) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-        <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- ✅ Free CKEditor 5 Classic build -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
-    <script>
-        M.Sidenav.init(document.querySelector('.sidenav'))
-    </script>
-            
+  <script>
+    // Initialize Materialize components
+    M.Sidenav.init(document.querySelector('.sidenav'))
+    M.FormSelect.init(document.querySelector('#status'))
+
+    // Initialize CKEditor if textarea exists
+    if (document.querySelector('#body')) {
+      ClassicEditor
+        .create(document.querySelector('#body'), {
+          toolbar: [
+            'heading', '|',
+            'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+            'blockQuote', 'undo', 'redo'
+          ]
+        })
+        .catch(error => console.error(error))
+    }
+  </script>
 </body>
 </html>

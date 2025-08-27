@@ -21,6 +21,10 @@ connectDB()
 
 const app = express()
 
+// BODY PARSER
+app.use(express.urlencoded({extended:false}))
+app.use(express.json())
+
 // logging
 if(process.env.NODE_ENV === 'developement'){
     app.use(morgan('dev'))
@@ -54,6 +58,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Routes
 app.use('/',require('./routes/index'))
 app.use('/auth',require('./routes/auth'))
+app.use('/stories',require('./routes/stories'))
 
 const PORT  = process.env.PORT || 3000
 
